@@ -629,6 +629,8 @@ function CheckoutModal({ open, onClose, cart, subtotal, onConfirm }) {
   const [payment, setPayment] = useState("cash");
   const [form, setForm] = useState({ name: "", phone: "", email: "", address: "" });
   const [done, setDone] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const deliveryFee = orderType === "delivery" ? 2.0 : 0;
   const discount = payment === "cash" ? subtotal * 0.1 : 0;
@@ -637,7 +639,30 @@ function CheckoutModal({ open, onClose, cart, subtotal, onConfirm }) {
   if (!open) return null;
 
   const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
-  const submit = (e) => { e.preventDefault(); setDone(true); };
+  const submit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    if (payment === "cash") {
+      setDone(true);
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch("/.netlify/functions/create-checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cart, orderType, customer: form }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.url) throw new Error(data.error || "Fehler");
+      window.location.href = data.url;
+    } catch (err) {
+      setError("Zahlung konnte nicht gestartet werden. Bitte versuche es erneut oder ruf uns an: 02161 2954536");
+      setLoading(false);
+    }
+  };
   const close = () => { setDone(false); onClose(); };
 
   return (
@@ -718,8 +743,18 @@ function CheckoutModal({ open, onClose, cart, subtotal, onConfirm }) {
                   </div>
                 </div>
 
-                <button type="submit" style={{ backgroundColor: C.tomato, ...F_BODY }} className="w-full py-4 rounded-lg text-sm font-bold text-white uppercase tracking-wide mt-1 hover:opacity-90 transition-opacity">
-                  Zahlungspflichtig bestellen
+                {error && (
+                  <div style={{ ...F_BODY, backgroundColor: "#FDECEA", border: `1px solid ${C.tomato}`, color: C.tomatoDark }} className="text-xs p-3 rounded-lg">
+                    {error}
+                  </div>
+                )}
+                <button
+                  type="submit"
+                  disabled={loading}
+                  style={{ backgroundColor: C.tomato, ...F_BODY, opacity: loading ? 0.6 : 1 }}
+                  className="w-full py-4 rounded-lg text-sm font-bold text-white uppercase tracking-wide mt-1 hover:opacity-90 transition-opacity"
+                >
+                  {loading ? "Wird geladen …" : payment === "cash" ? "Bestellung abschicken" : "Weiter zur Zahlung"}
                 </button>
               </form>
             </>
@@ -763,7 +798,30 @@ function ReservationView() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", date: "", time: "", guests: 2 });
   const [done, setDone] = useState(false);
   const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
-  const submit = (e) => { e.preventDefault(); setDone(true); };
+  const submit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    if (payment === "cash") {
+      setDone(true);
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch("/.netlify/functions/create-checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cart, orderType, customer: form }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.url) throw new Error(data.error || "Fehler");
+      window.location.href = data.url;
+    } catch (err) {
+      setError("Zahlung konnte nicht gestartet werden. Bitte versuche es erneut oder ruf uns an: 02161 2954536");
+      setLoading(false);
+    }
+  };
 
   return (
     <section style={{ backgroundColor: C.paper }} className="py-16">
