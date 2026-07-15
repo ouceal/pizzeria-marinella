@@ -1,4 +1,5 @@
 import Stripe from "stripe";
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export const handler = async (event) => {
@@ -22,7 +23,6 @@ export const handler = async (event) => {
       quantity: item.qty,
     }));
 
-    // Liefergebühr als eigene Position
     if (orderType === "delivery") {
       line_items.push({
         price_data: {
@@ -47,19 +47,13 @@ export const handler = async (event) => {
         name: customer?.name || "",
         phone: customer?.phone || "",
         address: customer?.address || "",
-        order_type: orderType,
+        order_type: orderType || "",
         items: cart.map((i) => `${i.qty}x ${i.nr}. ${i.name}`).join(" | ").slice(0, 490),
       },
     });
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ url: session.url }),
-    };
+    return { statusCode: 200, body: JSON.stringify({ url: session.url }) };
   } catch (err) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: err.message }),
-    };
+    return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
   }
-};cd
+};
