@@ -1139,6 +1139,20 @@ export default function PizzeriaMarinella() {
 
   useEffect(() => { window.scrollTo(0, 0); }, [view]);
 
+  const [payStatus, setPayStatus] = useState(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("bezahlt") === "1") {
+      setPayStatus("success");
+      setCart([]);
+      window.history.replaceState({}, "", "/");
+    } else if (params.get("abgebrochen") === "1") {
+      setPayStatus("cancelled");
+      window.history.replaceState({}, "", "/");
+    }
+  }, []);
+
   useEffect(() => {
     document.body.style.overflow = (cartOpen || checkoutOpen) ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -1168,6 +1182,30 @@ export default function PizzeriaMarinella() {
       <style>{FONTS}</style>
 
       <Navbar view={view} setView={setView} cartCount={cartCount} onCartClick={() => setCartOpen(true)} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
+
+        {payStatus && (
+        <div
+          style={{
+            backgroundColor: payStatus === "success" ? "#E9F0E6" : "#FDECEA",
+            borderBottom: `2px solid ${payStatus === "success" ? C.basil : C.tomato}`,
+          }}
+          className="px-5 py-4"
+        >
+          <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              {payStatus === "success" ? <Check size={20} color={C.basil} /> : <X size={20} color={C.tomato} />}
+              <span style={{ ...F_BODY, color: C.ink, fontWeight: 600 }} className="text-sm">
+                {payStatus === "success"
+                  ? "Zahlung erfolgreich! Deine Bestellung ist eingegangen — wir legen los. Grazie!"
+                  : "Zahlung abgebrochen. Dein Warenkorb ist noch da."}
+              </span>
+            </div>
+            <button onClick={() => setPayStatus(null)} className="shrink-0">
+              <X size={16} color={C.inkSoft} />
+            </button>
+          </div>
+        </div>
+      )}
 
       {view === "home" && (
         <>
