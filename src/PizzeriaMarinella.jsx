@@ -382,10 +382,10 @@ function Hero({ setView }) {
                 Rochusstraße 2–4 · Korschenbroich
               </span>
             </div>
-            <h1 style={{ ...F_DISPLAY, color: C.ink, lineHeight: 1.05 }} className="text-4xl sm:text-5xl md:text-6xl mb-3">Holzofen-Pizza,</h1>
+            <h1 style={{ ...F_DISPLAY, color: C.ink, lineHeight: 1.05 }} className="text-4xl sm:text-5xl md:text-6xl mb-3">Steinofen-Pizza,</h1>
             <h1 style={{ ...F_DISPLAY, color: C.tomato, lineHeight: 1.05 }} className="text-4xl sm:text-5xl md:text-6xl mb-7">wie in Italia.</h1>
             <p style={{ ...F_BODY, color: C.inkSoft }} className="text-lg max-w-md mb-9 leading-relaxed">
-              Original italienische Pizza aus dem Holzofen und handgemachte Burger — frisch bestellt, heiß geliefert oder abgeholt.
+              Original italienische Pizza aus dem Steinofen und handgemachte Burger — frisch bestellt, heiß geliefert oder abgeholt.
             </p>
             <div className="flex flex-wrap gap-4">
               <button onClick={() => setView("menu")} style={{ backgroundColor: C.tomato, ...F_BODY }} className="px-7 py-4 rounded-lg text-sm font-bold text-white uppercase tracking-wide flex items-center gap-2 hover:opacity-90 transition-opacity">
@@ -399,7 +399,7 @@ function Hero({ setView }) {
 
           <div className="relative mx-auto w-full max-w-sm">
             <div className="rounded-2xl overflow-hidden rotate-1" style={{ border: `10px solid white`, boxShadow: "0 18px 40px rgba(42,31,26,0.18)" }}>
-              <img src="/hero.jpg" alt="Frische Holzofen-Pizza" className="w-full h-72 sm:h-80 object-cover" />
+              <img src="/hero.jpg" alt="Frische Steinofen-Pizza" className="w-full h-72 sm:h-80 object-cover" />
             </div>
             <div className="absolute -bottom-8 -left-6">
               <CashSticker size={130} />
@@ -417,7 +417,7 @@ function Hero({ setView }) {
    ============================================================ */
 function AboutStrip() {
   const items = [
-    { icon: Flame, title: "Holzofen", text: "Original italienisch, bei über 400 °C gebacken." },
+    { icon: Flame, title: "Steinofen", text: "Original italienisch, bei über 400 °C gebacken." },
     { icon: Truck, title: "Lieferung & Abholung", text: "Schnell und heiß direkt zu dir oder zum Mitnehmen." },
     { icon: Banknote, title: "10 % bar sparen", text: "Bar zahlen bei Lieferung oder Abholung — Rabatt automatisch." },
   ];
@@ -959,12 +959,12 @@ function ReviewsSection() {
    ============================================================ */
 function GalerieSection() {
   const images = [
-    { src: "/dish1.png", alt: "Holzofen-Pizza mit frischen Zutaten" },
+    { src: "/dish1.png", alt: "Steinofen-Pizza mit frischen Zutaten" },
     { src: "/dish2.png", alt: "Handgemachter Burger mit Pommes" },
     { src: "/dish3.png", alt: "Pasta al Forno" },
     { src: "/dish4.png", alt: "Frischer gemischter Salat" },
     { src: "/dish5.png", alt: "Hausgemachtes Tiramisu" },
-    { src: "/dish6.png", alt: "Pizza frisch aus dem Holzofen" },
+    { src: "/dish6.png", alt: "Pizza frisch aus dem Steinofen" },
   ];
   return (
     <section style={{ backgroundColor: C.paper }} className="py-20">
@@ -992,7 +992,7 @@ function CtaBanner({ setView }) {
   return (
     <section className="relative py-24 text-center overflow-hidden bg-cover bg-center" style={{ backgroundImage: `linear-gradient(rgba(158, 42, 24, 0.51), rgba(199, 53, 31, 0.51)), url('/cta.jpg')` }}>
       <div className="max-w-2xl mx-auto px-5 relative">
-        <h2 style={{ ...F_DISPLAY, color: "white" }} className="text-3xl sm:text-4xl mb-4 leading-tight">Hunger auf echtes Holzofen-Feuer?</h2>
+        <h2 style={{ ...F_DISPLAY, color: "white" }} className="text-3xl sm:text-4xl mb-4 leading-tight">Hunger auf echtes Steinofen-Feuer?</h2>
         <p style={{ ...F_BODY, color: "#FBE6DD" }} className="mb-9 text-base">Bestell jetzt online oder reservier deinen Tisch — bar zahlen und 10 % sparen.</p>
         <div className="flex flex-wrap justify-center gap-4">
           <button onClick={() => setView("menu")} style={{ backgroundColor: C.paper, ...F_BODY, color: C.tomato }} className="px-7 py-4 rounded-lg text-sm font-bold uppercase tracking-wide hover:opacity-90 transition-opacity">Online Bestellen</button>
@@ -1091,7 +1091,7 @@ function Footer({ setView }) {
               <img src="/logo.png" alt="Pizzeria Marinella Logo" className="w-11 h-11 object-contain" />
               <span style={{ ...F_DISPLAY, color: C.tomato }} className="text-lg">Marinella</span>
             </div>
-            <p style={{ ...F_BODY, color: C.inkSoft }} className="text-sm leading-relaxed max-w-xs">Original italienische Küche aus dem Holzofen — mitten in Korschenbroich.</p>
+            <p style={{ ...F_BODY, color: C.inkSoft }} className="text-sm leading-relaxed max-w-xs">Original italienische Küche aus dem Steinofen — mitten in Korschenbroich.</p>
           </div>
           <div>
             <div style={{ ...F_MONO, color: C.basil, letterSpacing: "0.18em" }} className="text-xs uppercase mb-4">Kontakt</div>
