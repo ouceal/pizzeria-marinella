@@ -643,8 +643,23 @@ function CheckoutModal({ open, onClose, cart, subtotal, onConfirm }) {
     e.preventDefault();
     setError("");
 
-    if (payment === "cash") {
-      setDone(true);
+   if (payment === "cash") {
+      setLoading(true);
+      try {
+        const res = await fetch("/.netlify/functions/send-order", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            kind: "order",
+            cart, form, orderType, subtotal, discount, deliveryFee, total,
+          }),
+        });
+        if (!res.ok) throw new Error();
+        setDone(true);
+      } catch {
+        setError("Bestellung konnte nicht gesendet werden. Bitte ruf uns an: 02161 2954536");
+      }
+      setLoading(false);
       return;
     }
 
@@ -797,30 +812,26 @@ function Field({ label, ...props }) {
 function ReservationView() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", date: "", time: "", guests: 2 });
   const [done, setDone] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
+
   const submit = async (e) => {
     e.preventDefault();
     setError("");
-
-    if (payment === "cash") {
-      setDone(true);
-      return;
-    }
-
     setLoading(true);
     try {
-      const res = await fetch("/.netlify/functions/create-checkout", {
+      const res = await fetch("/.netlify/functions/send-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ cart, orderType, customer: form }),
+        body: JSON.stringify({ kind: "reservation", form }),
       });
-      const data = await res.json();
-      if (!res.ok || !data.url) throw new Error(data.error || "Fehler");
-      window.location.href = data.url;
-    } catch (err) {
-      setError("Zahlung konnte nicht gestartet werden. Bitte versuche es erneut oder ruf uns an: 02161 2954536");
-      setLoading(false);
+      if (!res.ok) throw new Error();
+      setDone(true);
+    } catch {
+      setError("Reservierung konnte nicht gesendet werden. Bitte ruf uns an: 02161 2954536");
     }
+    setLoading(false);
   };
 
   return (
@@ -858,8 +869,20 @@ function ReservationView() {
                 </button>
               </div>
             </div>
-            <button type="submit" style={{ backgroundColor: C.tomato, ...F_BODY }} className="sm:col-span-2 py-4 rounded-lg text-sm font-bold text-white uppercase tracking-wide mt-1 hover:opacity-90 transition-opacity">
-              Reservierung anfragen
+
+            {error && (
+              <div className="sm:col-span-2" style={{ ...F_BODY, backgroundColor: "#FDECEA", border: `1px solid ${C.tomato}`, color: C.tomatoDark }}>
+                <div className="text-xs p-3 rounded-lg">{error}</div>
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={loading}
+              style={{ backgroundColor: C.tomato, ...F_BODY, opacity: loading ? 0.6 : 1 }}
+              className="sm:col-span-2 py-4 rounded-lg text-sm font-bold text-white uppercase tracking-wide mt-1 hover:opacity-90 transition-opacity"
+            >
+              {loading ? "Wird gesendet …" : "Reservierung anfragen"}
             </button>
           </form>
         ) : (
