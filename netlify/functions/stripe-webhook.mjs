@@ -60,7 +60,7 @@ Zeit: ${new Date().toLocaleString("de-DE", { timeZone: "Europe/Berlin" })}
 
   try {
     await resend.emails.send({
-      from: "Bestellung <bestellung@pizzeria-marinella.de>",
+      from: "Bestellung <bestellung@info.pizzeria-marinella.de>",
       to: EMPFAENGER,
       subject: `NEUE BESTELLUNG (bezahlt) - ${typ} - ${m.name || ""}`,
       text,
