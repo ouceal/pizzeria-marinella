@@ -7,8 +7,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 // الإيميلات اللي كتوصلهم الطلبية
 const EMPFAENGER = [
   "rivonhermiz27@gmail.com",
-  // ملي العميل يفعّل Epson Connect، زيد إيميل الطابعة هنا:
-  // "xxxxxxx@print.epson.com",
+  "yjc866503e19c2@print.epsonconnect.com",
 ];
 
 const fmt = (cents) => (cents / 100).toFixed(2).replace(".", ",") + " €";
