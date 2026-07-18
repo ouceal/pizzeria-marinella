@@ -3,7 +3,6 @@ import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const EMPFAENGER = [
-  "rivonhermiz27@gmail.com",
   "yjc866503e19c2@print.epsonconnect.com",
 ];
 
