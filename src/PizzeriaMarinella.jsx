@@ -735,6 +735,12 @@ function CheckoutModal({ open, onClose, cart, subtotal, onConfirm }) {
 
                 <div>
                   <label style={{ ...F_MONO, color: C.inkSoft, letterSpacing: "0.1em" }} className="text-xs uppercase block mb-2">Zahlungsart</label>
+                  {!KARTE_AKTIV && (
+                    <div style={{ ...F_BODY, color: C.inkSoft, backgroundColor: "#FDF1E7", border: `1px dashed ${C.crust}` }} className="text-xs p-3 rounded-lg mb-3 flex items-center gap-2">
+                      <CreditCard size={14} color={C.crust} />
+                      <span>Kartenzahlung folgt in Kürze — aktuell nur Barzahlung möglich.</span>
+                    </div>
+                  )}
                   <div className="flex flex-col gap-3">
                     <button type="button" onClick={() => setPayment("cash")} style={{ backgroundColor: payment === "cash" ? "#FDF1E7" : "white", border: `2px solid ${payment === "cash" ? C.tomato : C.line}` }} className="w-full p-4 rounded-lg flex items-center justify-between">
                       <div className="flex items-center gap-3">
