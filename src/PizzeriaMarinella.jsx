@@ -397,6 +397,9 @@ function Hero({ setView }) {
               <button onClick={() => setView("reservation")} style={{ ...F_BODY, border: `2px solid ${C.ink}`, color: C.ink }} className="px-7 py-4 rounded-lg text-sm font-bold uppercase tracking-wide flex items-center gap-2">
                 Tisch Reservieren <Calendar size={16} />
               </button>
+              <a href="tel:+4921612954536" style={{ ...F_BODY, border: `2px solid ${C.tomato}`, color: C.tomato }} className="px-7 py-4 rounded-lg text-sm font-bold uppercase tracking-wide flex items-center gap-2 hover:opacity-90 transition-opacity">
+                <Phone size={16} /> 02161 2954536
+              </a>
             </div>
           </div>
 
@@ -498,6 +501,15 @@ function MenuView({ cart, addToCart }) {
         <div className="text-center mb-8">
           <span style={{ ...F_MONO, color: C.basil, letterSpacing: "0.22em" }} className="text-xs uppercase">La Carta</span>
           <h2 style={{ ...F_DISPLAY, color: C.ink }} className="text-3xl sm:text-4xl mt-2">Online Bestellen</h2>
+        </div>
+
+        {/* Abhol-Angebot */}
+        <div className="max-w-md mx-auto mb-8 rounded-xl px-5 py-4 text-center" style={{ backgroundColor: C.tomato, boxShadow: "0 8px 20px rgba(199,54,31,0.25)" }}>
+          <div style={{ ...F_MONO, color: "#FBE6DD", letterSpacing: "0.15em" }} className="text-[10px] uppercase mb-1">Abhol-Angebot</div>
+          <div style={{ ...F_DISPLAY, color: "white" }} className="text-xl leading-tight">Pizza Ø 28 cm · 3 Zutaten — 9,00 €</div>
+          <div style={{ ...F_BODY, color: "#FBE6DD" }} className="text-xs mt-2 leading-relaxed">
+            Weitere Zutaten je 1,50 € · Krabben, Meeresfrüchte, Hähnchen je 2,50 €
+          </div>
         </div>
 
         {/* Suche */}
@@ -1173,7 +1185,7 @@ function Footer({ setView }) {
               </div>
               <div className="flex items-center gap-3">
                 <Phone size={16} color={C.tomato} className="shrink-0" />
-                <span style={{ ...F_BODY, color: C.inkSoft }} className="text-sm">021612954536</span>
+                <a href="tel:+4921612954536" style={{ ...F_BODY, color: C.inkSoft }} className="text-sm hover:underline">02161 2954536</a>
               </div>
             </div>
           </div>
