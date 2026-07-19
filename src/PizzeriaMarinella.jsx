@@ -581,6 +581,22 @@ function MenuView({ cart, addToCart }) {
             </div>
           )}
         </div>
+
+        {/* Zusatzstoffe & Allergene — immer sichtbar unten */}
+        <div className="mt-8 rounded-xl p-5 sm:p-6" style={{ backgroundColor: C.linen, border: `1px solid ${C.line}` }}>
+          <div className="mb-3">
+            <span style={{ ...F_MONO, color: C.ink, fontWeight: 700, letterSpacing: "0.08em" }} className="text-[11px] uppercase">Zusatzstoffe</span>
+            <p style={{ ...F_BODY, color: C.inkSoft }} className="text-[11px] leading-relaxed mt-1">
+              1: mit Farbstoff(en) · 2: mit Konservierungsstoff(en) · 3: mit Antioxidationsmittel · 4: mit Geschmacksverstärker(n) · 5: mit Schwefeldioxid · 6: mit Schwärzungsmittel · 7: mit Phosphat · 8: mit Milcheiweiß · 9: koffeinhaltig · 10: chininhaltig · 11: mit Süßungsmittel · 12: enthält eine Phenylalaninquelle · 13: gewachst · 14: mit Taurin
+            </p>
+          </div>
+          <div>
+            <span style={{ ...F_MONO, color: C.ink, fontWeight: 700, letterSpacing: "0.08em" }} className="text-[11px] uppercase">Allergene</span>
+            <p style={{ ...F_BODY, color: C.inkSoft }} className="text-[11px] leading-relaxed mt-1">
+              a: enthält glutenhaltiges Getreide · b: enthält Krebstiere · c: enthält Eier · d: enthält Fische · f: enthält Soja · g: enthält Milch · h: enthält Schalenfrüchte · i: enthält Sellerie · j: enthält Senf · k: enthält Sesam · l: enthält Sulfit · m: enthält Lupine · n: enthält Weichtiere
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );
