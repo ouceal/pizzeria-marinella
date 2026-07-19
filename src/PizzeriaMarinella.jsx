@@ -33,13 +33,16 @@ const F_MONO = { fontFamily: "'Space Mono', monospace" };
    MENU DATA — vollständige Speisekarte
    ============================================================ */
 const CATEGORIES = [
-  { id: "pizzen", label: "Pizzen", icon: Pizza },
-  { id: "pasta", label: "Pasta & Nudeln", icon: Soup },
+  { id: "pizzen", label: "Pizzen", icon: Pizza, intro: "Alle Pizzen mit Tomatensauce und Käse." },
+  { id: "pasta", label: "Pasta & Nudeln", icon: Soup, intro: "Nudeln nach Wahl: Maccaroni, Spaghetti, Tortellini oder Tagliatelle" },
   { id: "auflaeufe", label: "Aufläufe", icon: UtensilsCrossed },
-  { id: "burger", label: "Burger & Schnitzel", icon: Beef },
+  { id: "burger", label: "Burger & Schnitzel", icon: Beef, intro: "Alle Burger mit Pommes" },
   { id: "snacks", label: "Snacks & Beilagen", icon: UtensilsCrossed },
   { id: "broetchen", label: "Pizzabrötchen", icon: Pizza },
-  { id: "salate", label: "Baguettes & Salate", icon: Salad },
+  { id: "salate", label: "Baguettes & Salate", icon: Salad, intro: [
+    { label: "Baguettes", text: "Frisch aus dem Ofen. Mit Tomaten, Gurken, Mais, Eisbergsalat & Remoulade" },
+    { label: "Salate", text: "Alle Salate mit 4 Brötchen und Kräuterbutter. Wählen Sie ihr Dressing: Joghurtsauce, Cocktailsauce, Honig-Balsamicoessig & Olivenöl/Essig" },
+  ] },
   { id: "dessert", label: "Desserts & Getränke", icon: IceCream2 },
 ];
 
@@ -417,7 +420,7 @@ function Hero({ setView }) {
    ============================================================ */
 function AboutStrip() {
   const items = [
-    { icon: Flame, title: "Steinofen", text: "Original italienisch, bei über 400 °C gebacken." },
+    { icon: Flame, title: "Steinofen", text: "Original italienisch." },
     { icon: Truck, title: "Lieferung & Abholung", text: "Schnell und heiß direkt zu dir oder zum Mitnehmen." },
     { icon: Banknote, title: "10 % bar sparen", text: "Bar zahlen bei Lieferung oder Abholung — Rabatt automatisch." },
   ];
@@ -537,6 +540,23 @@ function MenuView({ cart, addToCart }) {
 
         {/* Karte */}
         <div className="rounded-2xl p-7 sm:p-10" style={{ backgroundColor: "white", border: `1px solid ${C.line}`, boxShadow: "0 10px 30px rgba(42,31,26,0.07)" }}>
+          {!searching && (() => {
+            const cat = CATEGORIES.find((c) => c.id === activeCat);
+            if (!cat || !cat.intro) return null;
+            const intros = Array.isArray(cat.intro) ? cat.intro : [{ text: cat.intro }];
+            return (
+              <div className="mb-7 pb-6 border-b" style={{ borderColor: C.line }}>
+                {intros.map((it, i) => (
+                  <div key={i} className={i > 0 ? "mt-3" : ""}>
+                    {it.label && (
+                      <span style={{ ...F_MONO, color: C.tomato, letterSpacing: "0.1em", fontWeight: 700 }} className="text-[11px] uppercase block mb-1">{it.label}</span>
+                    )}
+                    <span style={{ ...F_BODY, color: C.tomato, fontWeight: 600 }} className="text-sm leading-relaxed">{it.text}</span>
+                  </div>
+                ))}
+              </div>
+            );
+          })()}
           {searching && (
             <div style={{ ...F_MONO, color: C.inkSoft }} className="text-xs uppercase mb-6">
               {results.length} {results.length === 1 ? "Ergebnis" : "Ergebnisse"} für „{query}“
@@ -557,7 +577,7 @@ function MenuView({ cart, addToCart }) {
           {/* Hinweis nur bei Pizzen */}
           {!searching && activeCat === "pizzen" && (
             <div style={{ ...F_BODY, color: C.inkSoft, borderColor: C.line }} className="text-xs mt-8 pt-6 border-t">
-              Jede weitere Zutat: 1,50 – 3,00 €. Alle Pizzen mit Tomatensauce und Käse.
+              Jede weitere Zutat: 1,50 – 3,00 €.
             </div>
           )}
         </div>
