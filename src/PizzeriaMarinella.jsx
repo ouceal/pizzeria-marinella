@@ -644,6 +644,10 @@ function CartDrawer({ open, onClose, cart, updateQty, subtotal, onCheckout }) {
 /* ============================================================
    CHECKOUT MODAL
    ============================================================ */
+/* Kartenzahlung vorübergehend deaktiviert (bis Steuernummer / Stripe live).
+   Zum Reaktivieren: KARTE_AKTIV auf true setzen. */
+const KARTE_AKTIV = false;
+
 function CheckoutModal({ open, onClose, cart, subtotal, onConfirm }) {
   const [orderType, setOrderType] = useState("pickup");
   const [payment, setPayment] = useState("cash");
@@ -742,6 +746,7 @@ function CheckoutModal({ open, onClose, cart, subtotal, onConfirm }) {
                       </div>
                       {payment === "cash" && <Check size={18} color={C.tomato} />}
                     </button>
+                    {KARTE_AKTIV && (
                     <button type="button" onClick={() => setPayment("card")} style={{ backgroundColor: "white", border: `2px solid ${payment === "card" ? C.ink : C.line}` }} className="w-full p-4 rounded-lg flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <CreditCard size={18} color={C.inkSoft} />
@@ -752,6 +757,7 @@ function CheckoutModal({ open, onClose, cart, subtotal, onConfirm }) {
                       </div>
                       {payment === "card" && <Check size={18} color={C.ink} />}
                     </button>
+                    )}
                   </div>
                 </div>
 
