@@ -1076,7 +1076,7 @@ function ImpressumView() {
         <p>Pizzeria Marinella<br />Inhaber: Rami Fahmi Hermiz<br />Rochusstraße 2–4<br />41352 Korschenbroich</p>
       </LegalBlock>
       <LegalBlock heading="Kontakt">
-        <p>Telefon: 02161 2954536<br />E-Mail: [E-MAIL-ADRESSE HIER]</p>
+        <p>Telefon: 02161 2954536<br />E-Mail:  info@pizzeria-marinella.de</p>
       </LegalBlock>
       <LegalBlock heading="Umsatzsteuer-ID">
         <p>Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br />[USt-IdNr. HIER — oder Steuernummer]</p>
@@ -1101,7 +1101,7 @@ function DatenschutzView() {
         <p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.</p>
       </LegalBlock>
       <LegalBlock heading="2. Verantwortliche Stelle">
-        <p>Pizzeria Marinella<br />Inhaber: Rami Fahmi Hermiz<br />Rochusstraße 2–4, 41352 Korschenbroich<br />Telefon: 02161 2954536<br />E-Mail: [E-MAIL-ADRESSE HIER]</p>
+        <p>Pizzeria Marinella<br />Inhaber: Rami Fahmi Hermiz<br />Rochusstraße 2–4, 41352 Korschenbroich<br />Telefon: 02161 2954536<br />E-Mail:  info@pizzeria-marinella.de</p>
       </LegalBlock>
       <LegalBlock heading="3. Datenerfassung auf dieser Website">
         <p>Der Provider der Seiten erhebt und speichert automatisch Informationen in Server-Log-Dateien, die Ihr Browser übermittelt (Browsertyp, Betriebssystem, Referrer-URL, Uhrzeit der Anfrage, IP-Adresse). Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO.</p>
