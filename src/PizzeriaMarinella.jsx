@@ -421,7 +421,7 @@ function Hero({ setView }) {
 function AboutStrip() {
   const items = [
     { icon: Flame, title: "Steinofen", text: "Original italienisch." },
-    { icon: Truck, title: "Lieferung & Abholung", text: "Schnell und heiß direkt zu dir oder zum Mitnehmen." },
+    { icon: Truck, title: "Lieferung & Abholung", text: "Lieferung ca. 30 Min · Abholung ca. 15 Min — heiß zu dir oder zum Mitnehmen." },
     { icon: Banknote, title: "10 % bar sparen", text: "Bar zahlen bei Lieferung oder Abholung — Rabatt automatisch." },
   ];
   return (
